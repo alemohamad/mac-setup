@@ -15,10 +15,10 @@ options = { 'developer': '', 'android': '', 'ios': '', 'designer': '', 'web' : '
 
 # Check if Xcode Command Line Tools are installed
 if os.system('xcode-select -p') != 0:
-  print "Installing XCode Tools"
+  print "Installing Xcode Tools"
   os.system('xcode-select --install')
   print "**************************************************************"
-  print "Install the XCode Command Line Tools and run this script again"
+  print "Install the Xcode Command Line Tools and run this script again"
   print "**************************************************************"
   exit()
 
