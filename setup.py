@@ -128,6 +128,7 @@ print "Installing Command Line Tools"
 os.system('npm install -g yo gulp-cli node-gyp serve ndb')
 
 print "Installing Fonts"
+os.system('brew tap homebrew/cask-fonts')
 os.system('brew cask install font-comfortaa font-open-sans font-open-sans-condensed font-roboto font-roboto-mono font-roboto-condensed font-roboto-slab font-lato font-noto-sans font-noto-serif')
 os.system('brew cask install font-source-sans-pro font-source-serif-pro font-ubuntu font-pt-mono font-pt-sans font-pt-serif font-fira-mono font-fira-code font-fira-sans font-source-code-pro font-montserrat')
 
@@ -136,6 +137,12 @@ os.system('brew cask install hyper spectacle the-unarchiver')
 os.system('brew cask install google-chrome firefox min github visual-studio-code')
 os.system('brew cask install atom skype spotify slack vlc macdown notion')
 
+print "Installing Hyper Plugins"
+os.system('hyper i hypercwd')
+os.system('hyper i hyperborder')
+os.system('hyper i hyperterm-tab-icons')
+os.system('hyper i hyper-blink')
+os.system('hyper i hyperterm-cursor')
 
 # Appropriate Software
 if options['developer'] == 'y':
@@ -160,11 +167,16 @@ if options['ios'] == 'y':
 
 if options['web'] == 'y':
   print "Installing Web Developer Tools"
-  os.system('brew cask install imageoptim imagealpha xnconvert composer mysql@5.7')
-  os.system('brew services start mysql@5.7')
+  os.system('brew cask install imageoptim imagealpha xnconvert')
+  os.system('brew install mysql mcrypt composer')
+  os.system('brew services start mysql')
+  os.system('composer global require laravel/installer')
   os.system('composer global require laravel/valet')
   os.system('valet install')
   os.system('valet start')
+  show_notification("We need your password")
+  os.system('sudo gem install rails -v 6.0.0')
+  os.system('pip3 install Django')
 
   if not os.path.isdir('/usr/local/bin') :
     os.system('sudo mkdir -p /usr/local/bin')
@@ -220,6 +232,10 @@ if options['zsh'] == 'y':
 
     os.system('echo "export NVM_DIR=\"\$HOME/.nvm\"\n[ -s \"\$NVM_DIR/nvm.sh\" ] && . \"\$NVM_DIR/nvm.sh\" # This loads nvm" >> ~/.zshrc')
 
+    os.system('source ~/.zshrc')
+
+    print "Change Hyper shell configuration to: '/bin/zsh'"
+
   # Remove the 'last login' message
   os.system('touch ~/.hushlogin')
 
@@ -268,11 +284,11 @@ if options['autoupdate'] == 'y':
 
 
 # Open Spectacle (Needs to be enabled manually)
-os.system('open -a "Spectacle"')
+# os.system('open -a "Spectacle"')
 
 
 # Clean Up
-os.system('brew cleanup && brew cask cleanup')
+os.system('brew cleanup')
 
 
 # # Mute startup sound
